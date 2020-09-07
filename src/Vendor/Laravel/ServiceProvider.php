@@ -43,6 +43,8 @@ use PragmaRX\Tracker\Tracker;
 use PragmaRX\Tracker\Vendor\Laravel\Artisan\Tables as TablesCommand;
 use PragmaRX\Tracker\Vendor\Laravel\Artisan\UpdateGeoIp;
 
+use October\Rain\Database\Model;
+
 class ServiceProvider extends PragmaRXServiceProvider
 {
     protected $packageVendor = 'pragmarx';
@@ -130,7 +132,8 @@ class ServiceProvider extends PragmaRXServiceProvider
 
             $this->registerMessageRepository();
 
-            $this->registerGlobalViewComposers();
+            //igorbel
+//            $this->registerGlobalViewComposers();
         }
     }
 
@@ -154,6 +157,9 @@ class ServiceProvider extends PragmaRXServiceProvider
     {
         $this->app->singleton('tracker', function ($app) {
             $app['tracker.loaded'] = true;
+
+            //igorbel
+            Model::setConnectionResolver($app['db']);
 
             return new Tracker(
                 $app['tracker.config'],

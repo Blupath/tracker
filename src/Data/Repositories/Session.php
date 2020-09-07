@@ -15,7 +15,8 @@ class Session extends Repository
 
     private $sessionInfo;
 
-    protected $relations = ['device', 'user', 'log', 'language', 'agent', 'referer', 'geoIp', 'cookie'];
+    //igorbel
+    protected $relations = ['device', /*'user',*/ 'log', 'language', 'agent', 'referer', 'geoIp', 'cookie'];
 
     public function __construct($model, Config $config, PhpSession $session)
     {

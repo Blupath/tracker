@@ -1,6 +1,7 @@
 <?php
 
 namespace PragmaRX\Tracker\Vendor\Laravel\Artisan;
+use App;
 
 class Tables extends Base
 {
@@ -44,6 +45,11 @@ class Tables extends Base
                 $this->info("Migration created: $destination");
             }
         }
+
+        //igorbel
+        $migrator = App::make('migrator');
+        $migrator->run($this->getBaseMigrationsPath());
+
     }
 
     /**
