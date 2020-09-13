@@ -301,9 +301,18 @@ class Tracker
         );
     }
 
+    //igorbel
+    public function isEnabledForTeam() {
+        if (Session::has('teamId') && Session::has('trackerEnabledForTeam'.session('teamId')))
+            return session('trackerEnabledForTeam'.session('teamId'));
+
+        return false;
+    }
+
     public function isTrackable()
     {
-        return $this->config->get('enabled') &&
+        //igorbel
+        return /*$this->config->get('enabled')*/ $this->isEnabledForTeam() &&
                 $this->logIsEnabled() &&
                 $this->allowConsole() &&
                 $this->parserIsAvailable() &&
