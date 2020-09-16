@@ -12,6 +12,8 @@ use PragmaRX\Tracker\Data\RepositoryManager as DataRepositoryManager;
 use PragmaRX\Tracker\Repositories\Message as MessageRepository;
 use PragmaRX\Tracker\Support\Minutes;
 use Psr\Log\LoggerInterface;
+use BL\Teams\Models\Team;
+use Session;
 
 class Tracker
 {
