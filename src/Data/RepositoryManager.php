@@ -247,7 +247,8 @@ class RepositoryManager implements RepositoryManagerInterface
 
     public function checkSessionData($newData, $currentData)
     {
-        if ($newData && $currentData && $newData !== $currentData) {
+        //igorbel - allow to save first $newData when there is no $currentData
+        if (($newData && $currentData && $newData !== $currentData) || $newData) {
             $newData = $this->updateSessionData($newData);
         }
 

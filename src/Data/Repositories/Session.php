@@ -15,7 +15,7 @@ class Session extends Repository
 
     private $sessionInfo;
 
-    //igorbel
+    //igorbel - disabled 'user'
     protected $relations = ['device', /*'user',*/ 'log', 'language', 'agent', 'referer', 'geoIp', 'cookie'];
 
     public function __construct($model, Config $config, PhpSession $session)
@@ -186,7 +186,8 @@ class Session extends Repository
     {
         $data = $data ?: $this->getSessionData();
 
-        if (!$data) {
+        //igorbel - reset when no uuid
+        if (!$data || !isset($data['uuid'])) {
             $this->resetSessionUuid($data);
 
             $this->sessionIsKnownOrCreateSession();
@@ -300,7 +301,8 @@ class Session extends Repository
 
     private function checkIfUserChanged($data, $model)
     {
-        if (!is_null($model->user_id) && !is_null($data['user_id']) && $data['user_id'] !== $model->user_id) {
+        //igorbel - allow null $model (first pass)
+        if (!$model || (!is_null($model->user_id) && !is_null($data['user_id']) && $data['user_id'] !== $model->user_id)) {
             $newSession = $this->regenerateSystemSession($data);
 
             $model = $this->findByUuid($newSession['uuid']);
