@@ -286,7 +286,11 @@ class Session extends Repository
 
     public function updateSessionData($data)
     {
-        $session = $this->checkIfUserChanged($data, $this->find($this->getSessionData('id')));
+        //igorbel
+        $model = null;
+        if ($this->getSessionData('id'))
+            $model = $this->find($this->getSessionData('id'));
+        $session = $this->checkIfUserChanged($data, $model);
 
         foreach ($session->getAttributes() as $name => $value) {
             if (isset($data[$name]) && $name !== 'id' && $name !== 'uuid') {
