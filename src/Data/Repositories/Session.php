@@ -136,7 +136,8 @@ class Session extends Repository
             if ($key === 'user_agent') {
                 continue;
             }
-            if ($sessionData[$key] !== $value) {
+            //igorbel
+            if (isset($sessionData[$key]) && $sessionData[$key] !== $value) {
                 if (!isset($model)) {
                     $model = $this->find($this->sessionInfo['id']);
                 }
